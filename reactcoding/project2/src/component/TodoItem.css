@@ -1,0 +1,37 @@
+.TodoItem {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #acdce28e;
+    
+}
+
+.TodoItem .checkbox{
+    width:20px;
+}
+
+.TodoItem .title{
+    flex:1;
+    text-decoration: underline wavy  #82c4d48e;
+     text-underline-offset: 5px;
+}
+
+.TodoItem .date{
+    font-size: 14px;
+    color:gray;
+}
+
+.TodoItem .btn button{
+    cursor:pointer;
+    color:gray;
+    font-size: 14px;
+    border:none;
+    border-radius: 5px;
+    padding:5px;
+}
+
+.TodoItem .btn button:hover{
+    background-color: #1f93ff;
+    color: white;
+}
