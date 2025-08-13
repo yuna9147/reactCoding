@@ -8,7 +8,9 @@
   flex-direction: column;
   gap: 30px;
 }
-
+body{
+  background-color: #cddffa44;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

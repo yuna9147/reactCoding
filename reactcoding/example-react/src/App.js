@@ -1,10 +1,10 @@
 import './App.css';
-import ItemMain  from "./product/ItemMain";
+import NoticeMain  from "./notice/NoticeMain";
 
 const App = () => {
   return(
     <div className="App">
-      <ItemMain  />
+      <NoticeMain  />
     </div>
   );
 }

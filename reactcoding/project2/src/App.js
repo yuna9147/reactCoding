@@ -2,8 +2,7 @@ import './App.css';
 import Header from './component/Header';
 import TodoEditor from './component/TodoEditor';
 import TodoList from './component/TodoList';
-import TodoItem from './component/TodoItem'
-import { useState } from 'react';
+import { useState,useRef } from 'react';
 
 const mockTodo = [
   {
@@ -29,11 +28,37 @@ const mockTodo = [
 
 const App = () => {
   const[todo,setTodo] = useState(mockTodo);
+  const idRef = useRef(3);
+
+  const onCreate = (content,date) =>{
+    const newItem = {
+      id:idRef.current,
+      content,
+      isDone:false,
+      createdDate: date,
+    };
+    setTodo([...todo,newItem]);
+    idRef.current += 1;
+  };
+
+  const onUpdate = (targetId) => {
+    setTodo(
+      todo.map((it)=>
+      it.id===targetId? {...it,isDone:!it.isDone} : it)
+    );
+  };
+
+  const onDelete = (targetId) => {
+    setTodo(todo.filter((it)=>
+    it.id!==targetId));
+  };
+
   return (
     <div className="App">
        <Header/>
-       <TodoEditor/>
-       <TodoList/>
+       
+       <TodoEditor onCreate = {onCreate}/>
+       <TodoList todo={todo} onUpdate={onUpdate} onDelete={onDelete} />
     </div>
   );
 }

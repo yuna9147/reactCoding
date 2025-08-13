@@ -1,5 +1,11 @@
 .App {
-  margin-left:10px;
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-logo {
