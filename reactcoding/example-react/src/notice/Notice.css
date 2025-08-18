@@ -16,7 +16,46 @@
 }
 
 
-.list-section > div:nth-child(1) {flex:0.5;}
-.list-section > div:nth-child(2) {flex:3;text-align: left;}
+.list-section > div:nth-child(1) {flex:0.5}
+.list-section > div:nth-child(2) {flex:3;text-align: left;  white-space: nowrap;  overflow: hidden;  text-overflow: ellipsis;}
 .list-section > div:nth-child(3) {flex:1;}
 .list-section > div:nth-child(4) {flex:1;}
+
+.importantTitle{
+    color:rgb(236, 77, 77);
+    font-weight: 700;
+}
+
+.importantTitle::before{
+    content:"💡";
+    display: inline;
+    margin-right: 4px; /* 간격만 줄 경우 */
+  vertical-align: middle; 
+}
+
+.content-area{
+    box-sizing: border-box;
+    width:100%;
+    padding:20px 30px ;
+    background-color:  #dae7f881;
+}
+
+.contentBtn{
+    width:100%;
+    display: flex;
+    justify-content: right;
+    margin-top: 10px;
+}
+
+.contentBtn .modifyBtn, .deleteBtn{
+    padding:5px;
+    background-color: #779bd367;
+    border:1px solid #779ad3d5;
+    color:#233455;
+    border-radius: 5px;
+    margin:5px;
+}
+
+.modifyBtn:hover,.deleteBtn:hover{
+    background-color: #7fa5df;
+}

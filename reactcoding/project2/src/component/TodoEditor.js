@@ -26,6 +26,7 @@ const TodoEditor = ({ onCreate }) =>{
 
         onCreate(content,date);
         setContent("");
+        setDate(today);
     };
 
     const onKeyDown = (e) =>{

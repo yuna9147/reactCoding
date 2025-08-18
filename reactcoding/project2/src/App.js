@@ -1,8 +1,9 @@
 import './App.css';
+//import TestComponent from './component/TestComponent'
 import Header from './component/Header';
 import TodoEditor from './component/TodoEditor';
 import TodoList from './component/TodoList';
-import { useState,useRef } from 'react';
+import { useReducer,useRef } from 'react';
 
 const mockTodo = [
   {
@@ -23,34 +24,54 @@ const mockTodo = [
     content:"롤 하기",
     createdDate:new Date().getTime(),
   },
-]
+];
 
+function reducer(state,action){
+  switch(action.type){
+    case "create" :{
+      return [...state,action.newItem];
+    }
+    case "update" : {
+      return state.map((it) =>
+      it.id === action.targetId?{...it, isDone: !it.isDone,}:it);
+    }
+    case "delete" : {
+      return state.filter((it) => it.id !== action.targetId);
+    }
+    default:
+      return state;
+  }
+}
 
 const App = () => {
-  const[todo,setTodo] = useState(mockTodo);
+  const[todo,dispatch] = useReducer(reducer,mockTodo);
   const idRef = useRef(3);
 
   const onCreate = (content,date) =>{
-    const newItem = {
+    dispatch({
+      type:"create",
+      newItem : {
       id:idRef.current,
       content,
       isDone:false,
       createdDate: date,
-    };
-    setTodo([...todo,newItem]);
+    },
+  });
     idRef.current += 1;
   };
 
   const onUpdate = (targetId) => {
-    setTodo(
-      todo.map((it)=>
-      it.id===targetId? {...it,isDone:!it.isDone} : it)
-    );
+    dispatch({
+      type:"update",
+      targetId,
+  });
   };
 
   const onDelete = (targetId) => {
-    setTodo(todo.filter((it)=>
-    it.id!==targetId));
+    dispatch({
+      type:"delete",
+      targetId,
+    });
   };
 
   return (

@@ -1,7 +1,12 @@
 import './NoticeList.css';
 import Notice from './Notice'
+import { useState } from 'react';
 
-const NoticeList = ({notice, count}) => {
+
+const NoticeList = ({notice, count,handleNewContent,onModify,onDelete }) => {
+
+    const [selectedNo, setSelectedNo] = useState(null);
+    
     return(
       
         <div className="NoticeList">
@@ -13,12 +18,12 @@ const NoticeList = ({notice, count}) => {
             </div>
             <div className="list_wrapper">
                 {notice.map((it,no)=>(
-                    <Notice key={no} {...it}/>
+                    <Notice key={no} {...it} selectedNo={selectedNo}  setSelectedNo={setSelectedNo} onDelete={onDelete} onModify={onModify} />
                 ))}
            </div> 
            <div className="footer">
                 <div> 게시글 총 {count}건</div>                       
-                <button type="button">새글</button>
+                <button type="button" onClick={handleNewContent}>새글</button>
            </div>
         </div>
     );

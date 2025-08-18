@@ -1,16 +1,7 @@
 .App {
-  max-width: 500px;
-  width: 100%;
-  margin: 0 auto;
-  box-sizing: border-box;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
+  text-align: center;
 }
-body{
-  background-color: #cddffa44;
-}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -45,19 +36,3 @@ body{
     transform: rotate(360deg);
   }
 }
-
-.a{
-  font-size: 30px;
-  margin:0px auto;
-  text-align: center;
-}
-
-.c button{
-  padding:7px;
-  width:100px;
-  color:white;
-  border-radius: 10px;
-  background-color: #30aa67e3;
-  border:none;
-}
-

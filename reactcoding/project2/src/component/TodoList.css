@@ -25,3 +25,18 @@
     flex-direction:column;
     gap:5px;
 }
+
+.TodoList .order{
+     display:flex;
+     gap:5px;
+     color:#3c67a0;
+     justify-content: right;
+     margin-bottom: 10px;
+     font-size: 13px;
+}
+
+.TodoList .order select{
+    color: #3c67a0;
+    border-color: #3c67a0;
+    border-radius: 5px;
+}

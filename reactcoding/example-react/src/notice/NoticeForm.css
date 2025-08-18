@@ -1,0 +1,79 @@
+.NoticeForm {
+    width:100%;
+
+}
+
+.form-wrap{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+    padding:5px;
+    margin: 5px 0;
+}
+
+.form-wrap > div:first-child {
+    min-width: 60px;
+}
+
+.form-wrap > div:last-child {
+    flex: 1; /* 입력 필드가 남은 공간 모두 차지 */
+}
+
+.NoticeForm .button-wrap{
+    width:100%;
+    display: flex;
+    justify-content: right; /* 오른쪽 정렬 */
+}
+
+.NoticeForm .createBtn, .closeBtn{
+    padding:5px;
+    background-color: #779bd367;
+    border:1px solid #779ad3d5;
+    color:#233455;
+    border-radius: 5px;
+    margin:10px;
+}
+
+.createBtn:hover,.closeBtn:hover{
+    background-color: #7fa5df;
+}
+
+.NoticeForm .title{
+    color:#6c93cf;
+    width:100%;
+    padding:10px;
+    border:none;
+    border-top:1px solid #91c4cae8;
+}
+
+
+.NoticeForm .writer,.important,.content{
+    color:#6c93cf;
+    width:100%;
+    padding:10px;
+    border:none;
+    border-top:1px solid #91c4cae8;
+}
+
+.important .checkbox{
+  float: left;
+  margin-right: 6px;
+}
+
+
+input,textarea{
+    border: 1px solid #6392c9;
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid #bbbfc4;
+    padding:10px;
+    box-sizing: border-box;
+}
+
+
+.inputContent:focus,.inputTitle:focus{
+    border: 1px solid #5184d1;
+    outline: none;
+}
+
