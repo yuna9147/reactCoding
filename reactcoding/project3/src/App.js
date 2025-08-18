@@ -1,25 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import {Routes, Route, Link} from 'react-router-dom';
+import Home from './pages/Home';
+import Diary from './pages/Diary';
+import New from './pages/New';
+import Edit from './pages/Edit';
 
-function App() {
+
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/new' element={<New />} />
+        <Route path='/diary/:id' element={<Diary />} />
+        <Route path='/edit' element={<Edit />} />
+      </Routes>
+      
+      {/* <div>
+        <Link to={'/'}>Home</Link> <br/>
+        <Link to={'/new'}>새 일기</Link><br/>
+        <Link to={'/diary'}>읽기</Link><br/>
+        <Link to={'/edit'}>수정/삭제</Link>
+      </div> */}
     </div>
   );
 }
-
 export default App;

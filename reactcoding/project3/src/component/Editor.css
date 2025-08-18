@@ -1,0 +1,82 @@
+.Editor {}
+
+.Editor .editor_section{
+    margin-bottom: 40px;
+}
+
+.Editor h4{
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.Editor input, textarea{
+    border-radius:5px;
+    background: #ececec;
+    padding:20px;
+    font-size: 20px;
+    background-color:transparent;
+    border:1px solid #d1d0d0;
+}
+
+.Editor input{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor:pointer;
+}
+.Editor textarea{
+    width:100%;
+    min-height:200px;
+    box-sizing: border-box;
+    resize:vertical;
+    
+}
+
+.Editor .bottom_section{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Editor .emotion_list_wrapper{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    gap: 20px; 
+    width: 100%; 
+    padding: 10px 0;
+}
+
+.Editor .emotion_list_wrapper img{
+    width:70px;
+    height:70px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.emotion1.emotion-on{
+    background-color: #64c964;
+}
+
+.emotion2.emotion-on{
+    background-color: #9dd772;
+}
+
+.emotion3.emotion-on{
+    background-color: #fdce17;
+}
+
+.emotion4.emotion-on{
+    background-color: #fd8446;
+}
+
+.emotion5.emotion-on{
+    background-color: #fd565f;
+}
+
+.emotion{
+    width:120px;
+    height:120px;
+    padding:10px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
