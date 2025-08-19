@@ -1,7 +1,7 @@
 import './Home.css';
 import Button from '../component/Button';
 import Header from '../component/Header';
-import Editor from '../component/Editor';
+import Diary from '../pages/Diary';
 import {useContext, useState,useEffect} from "react";
 import {DiaryStateContext} from "../App"
 import { getMothRangeByDate } from '../util';
@@ -44,7 +44,7 @@ const Home = () =>{
       />  
 
       </div>
-
+      <Diary />
        {/* <div>
          Home 화면
          <Editor
