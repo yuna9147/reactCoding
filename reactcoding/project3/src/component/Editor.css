@@ -46,37 +46,4 @@
     padding: 10px 0;
 }
 
-.Editor .emotion_list_wrapper img{
-    width:70px;
-    height:70px;
-    object-fit: cover;
-    cursor: pointer;
-}
 
-.emotion1.emotion-on{
-    background-color: #64c964;
-}
-
-.emotion2.emotion-on{
-    background-color: #9dd772;
-}
-
-.emotion3.emotion-on{
-    background-color: #fdce17;
-}
-
-.emotion4.emotion-on{
-    background-color: #fd8446;
-}
-
-.emotion5.emotion-on{
-    background-color: #fd565f;
-}
-
-.emotion{
-    width:120px;
-    height:120px;
-    padding:10px;
-    border-radius: 10px;
-    box-sizing: border-box;
-}

@@ -23,16 +23,64 @@ export const getEmotionImgById = (emotionId) =>{
     }
 };
 
-export const getFormattedDate = (targetDate) =>{
+export const getFormattedDate = (targetDate) => {
     let year = targetDate.getFullYear();
-    let month = targetDate.getMonth() +1;
+    let month = targetDate.getMonth() + 1;
     let date = targetDate.getDate();
 
-    if(month < 10) {
-        month=`0${month}`;
+    if (month < 10) {
+        month = `0${month}`;
     }
-    if(date <10) {
+    if (date < 10) {
         date = `0${date}`;
     }
     return `${year}-${month}-${date}`;
 };
+
+export const emotionList = [
+    {
+        id:1,
+        name:"완전좋음",
+        img:getEmotionImgById(1)
+    },
+    {
+        id:2,
+        name:"좋음",
+        img:getEmotionImgById(2)
+    },
+    {
+        id:3,
+        name:"그럭저럭",
+        img:getEmotionImgById(3)
+    },
+    {
+        id:4,
+        name:"나쁨",
+        img:getEmotionImgById(4)
+    },
+    {
+        id:5,
+        name:"끔찍함",
+        img:getEmotionImgById(5)
+    },
+];
+
+
+//한달치 일기내용만 가져오기 위한 함수
+export const getMothRangeByDate = (date) => {
+    const beginTimeStamp = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        1  //1일부터~
+    ).getTime();
+    const endTimeStamp = new Date(
+        date.getFullYear(),
+        date.getMonth()+1,
+        0, // 다음달 0일인데 0일은 없으니까 전달 마지막날의미
+        23,
+        59,
+        59
+    ).getTime();
+    return{ beginTimeStamp,endTimeStamp};
+};
+

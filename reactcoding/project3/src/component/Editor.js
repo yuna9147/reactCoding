@@ -1,9 +1,9 @@
 import './Editor.css';
-import { useState } from 'react';
-import { getFormattedDate } from '../util';
+import { useState,useEffect } from 'react';
+import { getFormattedDate,emotionList } from '../util';
 import Button from "./Button"
 import { useNavigate } from "react-router-dom";
-import {getEmotionImgById} from '../util';
+import EmotionItem from './EmotionItem';
 
 const Editor = ({initData,onSubmit}) =>{
     const navigate = useNavigate();
@@ -12,6 +12,15 @@ const Editor = ({initData,onSubmit}) =>{
         emotionId:3,
         content:"",
     });
+
+    useEffect(()=>{
+        if(initData) {
+            setState({
+                ...initData,
+                date:getFormattedDate(new Date(parseInt(initData.data))),
+            });
+        }
+    },[initData]);
 
     const handleChangeDate = (e) =>{
         setState({
@@ -35,10 +44,10 @@ const Editor = ({initData,onSubmit}) =>{
         navigate(-1);
     };
 
-    const handleChangeEmotion = (e) =>{
+    const handleChangeEmotion = (emotionId) =>{
        setState({
         ...state,
-        emotionId:e,
+        emotionId,
        });
      };
 
@@ -52,16 +61,13 @@ const Editor = ({initData,onSubmit}) =>{
         </div>
         <div className='editor_section'>
             <h4>오늘의 감정</h4>
-            <div className='emotion_list_wrapper'>
-                {[1,2,3,4,5].map((id)=>(
-                    <div
-                        key={id}
-                        className={`emotion emotion${id} ${state.emotionId ===id ?  'emotion-on':''}`}
-                        onClick={() => handleChangeEmotion(id)} >
-                            <img src={getEmotionImgById(id)} alt={`감정${id}`} /><br/>
-                            {['완전좋음','좋음','그럭저럭','나쁨','끔찍함'][id-1]}
-                    </div>
-                ))}
+            <div className='input_wrapper emotion_list_wrapper'>
+                {emotionList.map((it)=>(
+                        <EmotionItem key={it.id}
+                        {...it}
+                        onClick={handleChangeEmotion}
+                        isSelected={state.emotionId===it.id}/> 
+                        ))}
                 </div>
         </div>
         <div className='editor_section'>
