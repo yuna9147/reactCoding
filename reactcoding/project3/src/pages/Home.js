@@ -1,39 +1,38 @@
 import './Home.css';
 import Button from '../component/Button';
 import Header from '../component/Header';
-import Diary from '../pages/Diary';
+import DiaryList from '../component/DiaryList';
 import {useContext, useState,useEffect} from "react";
 import {DiaryStateContext} from "../App"
-import { getMothRangeByDate } from '../util';
+import { getMonthRangeByDate } from '../util';
 
 
-const Home = () =>{
-  const data = useContext(DiaryStateContext);
-  const [filteredData, setFilteredData] = useState([]);
-  const[pivotDate, setPivotDate] = useState(new Date());
-  const headerTitle = `${pivotDate.getFullYear()}년 ${pivotDate.getMonth()+1}월`;
+const Home = () => {
+    const data = useContext(DiaryStateContext);
+    const [filteredData, setFilteredData] = useState([]);
+    const [pivotDate, setPivotDate] = useState(new Date());
+    const headerTitle = `${pivotDate.getFullYear()}년 ${pivotDate.getMonth() + 1}월`;
 
-  useEffect(() =>{
-    if(data.length >= 1) {
-      const{beginTimeStamp, endTimeStamp} = getMothRangeByDate(pivotDate);
-      setFilteredData(
-        data.filter(
-          (it) => beginTimeStamp <= it.data && it.data <= endTimeStamp
-        )
-      );
-    } else {
-      setFilteredData([]);
-    }
-  },[data,pivotDate]);
+    useEffect(() => {
+        if (data.length >= 1) {
+            const { beginTimeStamp, endTimeStamp } = getMonthRangeByDate(pivotDate);
+            setFilteredData(
+                data.filter(
+                    (it) => beginTimeStamp <= it.date && it.date <= endTimeStamp
+                )
+            );
+        } else {
+            setFilteredData([]);
+        }
+    }, [data, pivotDate]);
 
+    const onIncreaseMonth = () => {
+        setPivotDate(new Date(pivotDate.getFullYear(), pivotDate.getMonth() + 1));
+    };
 
-  const onIncreaseMonth = () =>{
-    setPivotDate(new Date(pivotDate.getFullYear(), pivotDate.getMonth() +1));
-  };
-
-  const onDecreaseMonth = () =>{
-    setPivotDate(new Date(pivotDate.getFullYear(), pivotDate.getMonth() -1));
-  };
+    const onDecreaseMonth = () => {
+        setPivotDate(new Date(pivotDate.getFullYear(), pivotDate.getMonth() - 1));
+    };
 
     return (
       <>
@@ -44,7 +43,7 @@ const Home = () =>{
       />  
 
       </div>
-      <Diary />
+      <DiaryList data={filteredData}/>
        {/* <div>
          Home 화면
          <Editor

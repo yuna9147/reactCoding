@@ -67,7 +67,7 @@ export const emotionList = [
 
 
 //한달치 일기내용만 가져오기 위한 함수
-export const getMothRangeByDate = (date) => {
+export const getMonthRangeByDate = (date) => {
     const beginTimeStamp = new Date(
         date.getFullYear(),
         date.getMonth(),
