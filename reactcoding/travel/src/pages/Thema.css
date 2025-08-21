@@ -1,0 +1,40 @@
+.Thema {
+    width:900px;
+    margin: 20px auto;
+    background-color: white;
+    border-radius: 25px;
+    padding-top:20px 0 40px;
+    box-sizing: border-box;
+     overflow-x: hidden;
+     box-sizing: border-box;
+}
+
+.Thema h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.Thema div h3{
+    text-align: left;
+    margin-left: 20px;
+}
+
+
+.Thema .wrapper{
+    display: flex;
+    align-items: center;
+    gap:20px;
+}
+
+.Thema .wrapper:hover{
+    cursor: pointer;
+}
+
+.Thema div[class$="section"]{
+    margin-bottom: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}

@@ -18,8 +18,8 @@ const New = () => {
     if(content===""){
       alert("내용을 입력해 주세요");
     } else {
-       onCreate(date,content,emotionId);
-    navigate("/",{replace:true});
+      onCreate(date,content,emotionId);
+      navigate("/",{replace:true});
     }
    
   };

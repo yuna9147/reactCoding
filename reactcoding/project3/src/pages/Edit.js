@@ -26,13 +26,11 @@ const Edit = () => {
   };
 
   
-    const onClickUpdate = () => {
-    const{date,content,emotionId} = data;
-    if(content===""){
-      alert("내용을 입력해 주세요");
-    } else {
+    const onSubmit = (data) => {
+    if(window.confirm("일기를 정말 수정할까요?")){
+      const{date,content,emotionId} = data;
       onUpdate(id,date,content,emotionId);
-      onsubmit;
+      navigate("/",{replace:true});
     }
    
   };
@@ -50,7 +48,7 @@ const Edit = () => {
         />
 
 
-        <Editor   initData={data}   onClick={onClickUpdate}/>
+        <Editor   initData={data}   onSubmit={onSubmit}/>
     </div>
   );
   } 

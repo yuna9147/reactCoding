@@ -1,0 +1,98 @@
+.travelInfo {
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width:fit-content;
+  margin: 0 auto 30px;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  border-bottom: 1px solid #ccc;
+
+}
+
+.travelInfo .image-section {
+  width: 200px;
+  height:150px;
+  margin-right: 20px;
+  display: flex;
+    box-sizing: border-box;
+}
+
+.travelInfo .image-section img {
+  box-sizing: border-box;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.travelInfo .content-section {
+  flex: 1;
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content:start; 
+  text-align: left;
+    box-sizing: border-box;
+}
+
+.travelInfo .city {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.travelInfo .spot {
+  font-weight: bold;
+  font-size: 17px;
+  margin-bottom: 6px;
+}
+
+.travelInfo .tags {
+  font-size: 13px;
+  color: #444;
+  position: relative; /* 자식 요소의 기준점이 됨 */
+  display: inline-block;
+
+}
+
+.travelInfo .tags a {
+  color: #007bff;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+.travelInfo .tags a:hover {
+  text-decoration: underline;
+}
+
+.travelInfo .info-section{
+    margin-top: 10px;
+    color:#666
+}
+.travelInfo .hidden{
+  visibility: hidden;
+}
+
+.travelInfo .tip-content {
+  position: absolute;
+  top: 100%; /* tags 바로 아래 */
+  left: 10%;
+  font-weight: 700;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 5px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px #00000026;
+  margin-top: 4px;
+  display: none; /* 기본 숨김 */
+  z-index: 100;
+}
+
+/* .tags에 마우스 올렸을 때 자식 .tip-content 보여주기 */
+.travelInfo .tags:hover .tip-content {
+  display: block;
+}

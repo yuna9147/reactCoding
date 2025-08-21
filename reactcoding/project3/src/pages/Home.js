@@ -44,20 +44,7 @@ const Home = () => {
 
       </div>
       <DiaryList data={filteredData}/>
-       {/* <div>
-         Home 화면
-         <Editor
-          initData={{
-            date:new Date().getTime(),
-            emotionId:1,
-            content:"이전 일기",
-          }}
-          onSubmit={() =>{
-            alert("작성완료")
-          }}
-          />
-       </div> */}
-
+    
 </>
       
     );
