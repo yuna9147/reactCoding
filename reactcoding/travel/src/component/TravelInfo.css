@@ -4,11 +4,11 @@
   align-items: flex-start;
   justify-content: flex-start;
   width:fit-content;
-  margin: 0 auto 30px;
+  margin: 0 auto 5px;
   padding: 20px;
   font-family: 'Arial', sans-serif;
   border-bottom: 1px solid #ccc;
-
+  width:100%;
 }
 
 .travelInfo .image-section {
@@ -26,6 +26,12 @@
   display: block;
   object-fit: cover;
   border-radius: 8px;
+}
+
+.travelInfo .image-section img:hover{
+  cursor: pointer;
+  opacity: 0.8;
+
 }
 
 .travelInfo .content-section {
@@ -48,6 +54,12 @@
   font-weight: bold;
   font-size: 17px;
   margin-bottom: 6px;
+}
+
+.travelInfo .spot:hover  {
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 900;
 }
 
 .travelInfo .tags {
@@ -95,4 +107,9 @@
 /* .tags에 마우스 올렸을 때 자식 .tip-content 보여주기 */
 .travelInfo .tags:hover .tip-content {
   display: block;
+  overflow: hidden;
+  resize: none;
+  min-width:200px;
+  height:auto;
+  padding:10px;
 }

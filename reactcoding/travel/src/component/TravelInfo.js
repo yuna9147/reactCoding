@@ -5,7 +5,7 @@ import './TravelInfo.css';
 
 const TravelInfo = ({data}) =>{
     if(!data){
-        return <div>정보가 없습니다.</div>;
+        return null;
     } else{
         const {city,spot,tags,tip,about,option,img} = data;
         let imgSrc;
@@ -16,16 +16,20 @@ const TravelInfo = ({data}) =>{
             imgSrc=require(`../img/default.jpg`);
         }
 
+          const goDetail =() =>{
+                alert("안녕");
+                
+            }
         return(
             
                 <div className="travelInfo">
-                        <div  className="image-section" >
+                        <div  className="image-section" onClick={goDetail}>
                             <img src= {imgSrc} />
                         </div>
 
                         <div className="content-section">
-                            <div className="city">{city}</div>
-                            <div className="spot">{spot}</div>
+                            <div className="city " >{city}</div>
+                            <div className="spot" onClick={goDetail}> {spot}</div>
                             <div className="tags">
                                 <span>{tags}</span> 
                                 <a href="#" className="tip">운영시간</a>

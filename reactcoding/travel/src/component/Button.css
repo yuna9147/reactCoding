@@ -10,17 +10,8 @@
     font-weight: bold;
 }
 
-.Button_default {
-    background-color:#abbec721;
-    color:#467991;
+.Button img {
+    width:40px;
+    margin-left: 20px;
 }
 
-.Button_positive{
-    background-color: #7dcfbb;
-    color: white;
-}
-
-.Button_negative{
-    background-color: #e67378;
-    color:white;
-}

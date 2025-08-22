@@ -3,7 +3,7 @@
     margin: 20px auto;
     background-color: white;
     border-radius: 25px;
-    padding-top:20px 0 40px;
+    padding:20px 0 10px;
     box-sizing: border-box;
      overflow-x: hidden;
      box-sizing: border-box;
@@ -11,7 +11,7 @@
 
 .Thema h1 {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 5px;
 }
 
 .Thema div h3{
@@ -26,12 +26,25 @@
     gap:20px;
 }
 
-.Thema .wrapper:hover{
+.Thema .wrapper div:hover{
     cursor: pointer;
 }
 
+.Thema .wrapper div{
+    color:#808080ab;
+    font-size: 12px;
+}
+
+.Thema .totalInfo{
+    color:gray;
+    margin:10px;
+    border-bottom: 1px solid #80808065;
+    text-align: left;
+    padding:10px 20px;
+}
+
 .Thema div[class$="section"]{
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     padding: 10px;
     box-sizing: border-box;
     border-radius: 15px;

@@ -4,7 +4,6 @@
     display: flex;
     align-items: center;
     border-bottom: 1px solid #e2e2e2;
-
 }
 
 .Header > div{
@@ -13,8 +12,12 @@
 
 .Header .header_title{
     width:50%;
-    font-size: 25px;
+    font-size: 30px;
+    font-weight: bold;
     justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
 }
 
 .Header .header_left {

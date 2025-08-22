@@ -1,0 +1,44 @@
+.New {
+    background-color: white;
+    width: 500px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    border-radius: 5px;
+    z-index: 1000;
+    text-align: left;
+}
+
+.New h5 { margin: 0; }
+.New div { width: 100%; }
+.New .input_section input {
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+.New .input_section .Input .date {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.New button {
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100px;
+}
+.New #createBtn {
+    position: absolute;
+    right: 150px;
+    bottom: 150px;
+}
+.New #cancelBtn {
+    position: absolute;
+    right: 40px;
+    bottom: 150px;
+}

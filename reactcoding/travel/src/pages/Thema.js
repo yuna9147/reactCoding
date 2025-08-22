@@ -1,49 +1,51 @@
 import TravelInfo from "../component/TravelInfo";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './Thema.css'
 import { useState } from "react";
+import Header from "../component/Header";
+import Button from "../component/Button";
 
 
 const Thema = ({ data }) => {
-  const { id } = useParams();
-  const item = data?.find((d) => d.id === id);
+  const { pid } = useParams();
+  const navigate = useNavigate();
 
-  const activities = data?.filter((d) => d.option === 'activity');
-  const foods = data?.filter((d) => d.option === 'food');
-  const hotels = data?.filter((d) => d.option === 'hotel');
+  const goBack = () =>{
+    navigate(-1);
+  };
+
+   // pid에 해당하는 여행만 필터
+  const filteredData  = data.filter(item => String(item.pid)===String(pid));
+
+  // 해당 여행 안에서 option 별 필터링
+  const activities = filteredData.filter(d => d.option === 'activity');
+  const foods = filteredData.filter(d => d.option === 'food');
 
   const [showActivity, setShowActivity] = useState(true);
   const [showFood, setShowFood] = useState(true);
-  const [showHotel, setShowHotel] = useState(true);
+
+
     return(
         <div className="Thema">
-            <h1>여행지 정보</h1>
+            <Header title="여행지 정보" leftChild={<Button img="left" onClick={goBack}/>  }/>
+            <div className="totalInfo">{activities.length+foods.length}개 항목</div>
             <div className="activity-section">
-                <div className="wrapper"  onClick={() =>setShowActivity(!showActivity)}>
+                <div className="wrapper" >
                     <h3>즐길거리 ({activities.length})</h3>
-                    <div>{showActivity ? "▼" : "▲"}</div>
+                    <div onClick={() =>setShowActivity(!showActivity)}>{showActivity ? "▲ 접기" : "▼ 펼치기"}</div>
                 </div>
                 {showActivity && activities.map((activity) => (
                 <TravelInfo key={activity.id} data={activity}/>
                 ))}
             </div>
-            <div className="food-section">
-                <div className="wrapper"  onClick={() =>setShowFood(!showFood)}>
+            
+            <div className="food-section" >
+                <div className="wrapper">
                     <h3>먹거리 ({foods.length})</h3>
-                    <div>{showFood ? "▼" : "▲"}</div>
+                    <div onClick={() =>setShowFood(!showFood)}>{showFood ? "▲ 접기" : "▼ 펼치기"}</div>
                 </div>
                 {showFood &&foods.map((food) => (
                 <TravelInfo key={food.id} data={food}/>
-                ))}
-              
-            </div>
-             <div className="hotel-section">
-                 <div className="wrapper" onClick={() =>setShowHotel(!showHotel)}>
-                    <h3>숙소 ({hotels.length})</h3>
-                    <div>{showHotel ? "▼" : "▲"}</div>
-                </div>
-                {showHotel && hotels.map((hotel) => (
-                <TravelInfo key={hotel.id} data={hotel}/>
                 ))}
             </div>
         </div>

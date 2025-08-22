@@ -1,13 +1,22 @@
 import './App.css';
-//import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState,useReducer } from 'react';
 import {Routes, Route} from 'react-router-dom';
 import Thema from './pages/Thema';
-//import New from './pages/New';
-//import Edit from './pages/Edit';
+import New from './pages//New';
+import Detail from './pages/Detail';
+import Edit from './pages/Edit';
+import DetailItems from './pages/DetailItems';
+import Home from './pages/Home';
 
+
+const day = new Date().getTime();
 
 const mockData = [
   {
+  pid:0,
+  title:"프랑스 여행",
+  start_date: new Date(day).getTime(),
+  end_date: new Date(day).getTime() + (5000*60*60*24),
   id:"0",
   city:"파리",
   spot:"개선문",
@@ -24,7 +33,8 @@ const mockData = [
        [4~9월] 
        수~월 10:00~23:00, 화 11:00~23:00
        
-       [10~3월] 수~월 10:00~22:30, 화 11:00~22:30
+       [10~3월] 
+       수~월 10:00~22:30, 화 11:00~22:30
 
        [휴무일]
        1월 1일, 5월 1일, 5월 8일(아침), 6월 14일(아침), 11월 11일(아침), 12월 25일`,
@@ -32,6 +42,10 @@ const mockData = [
   img:"triomphe.jpg"
   },
   {
+  pid: 0,
+  title:"프랑스 여행",
+  start_date: new Date(day).getTime(),
+  end_date: new Date(day).getTime() + (1000*60*60*24),
   id:"1",
   city:"도쿄",
   spot:"디즈니랜드" ,
@@ -51,6 +65,10 @@ const mockData = [
   img:"disneyland.jpg"
   },
   {
+  pid: 0,
+  title:"신혼 여행",
+  start_date: new Date(day).getTime(),
+  end_date: new Date(day).getTime() + (1000*60*60*24),
   id:"2",
   city:"발리",
   spot:"Taco Casa" ,
@@ -77,20 +95,92 @@ const mockData = [
   },
   
 ]
+function reducer(state,action){
+  switch(action.type){
+    case "INIT" : {
+      return action.data;
+    }
+    case "CREATE" : {
+      return [action.data, ...state];
+    }
+    case "UPDATE" : {
+      return state.map((it) =>
+        String(it.id) === String(action.data.id) ? {...action.data} : it);
+    }
+    case "DELETE" : {
+      return state.filter((it) => String(it.id)!==String(action.targetId));
+    }
+    default:{
+      return state;
+    }
+  }
+}
 
+export const TravelStateContext = React.createContext();
+export const TravelDispatchContext = React.createContext();
 
 const App = () => {
-        return (
-        <div className="App">
-          <Routes>
-            <Route path='/' element={<Thema data={mockData} />} />
-            {/* <Route path='/new' element={<New />} />
-            <Route path='/Thema/:id' element={<Thema />} />
-            <Route path='/edit/:id' element={<Edit />} /> */}
-          </Routes>
-        </div>
- 
-      ); 
-    }
+    const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [data, dispatch] = useReducer(reducer, []);
+  const idRef = useRef(3);
 
+  useEffect(()=>{
+    dispatch({
+      type: "INIT",
+      data: mockData,
+    });
+    setIsDataLoaded(true);
+  },[]);
+
+  const onCreate = (title, city, start_date, end_date) => {
+    const newDataNum = idRef.current;
+    dispatch({
+      type:"CREATE",
+      data: {
+        pid:newDataNum,
+        title:title,
+        city:city,
+        start_date: new Date(start_date).getTime(),
+        end_date: new Date(end_date).getTime(),
+      },
+    });
+    idRef.current += 1;
+    return newDataNum;
+  };
+  console.log(data);
+
+  const onUpdate = () => {
+
+  }
+  const onDelete = () => {
+    
+  }
+
+  
+  if(!isDataLoaded) {
+      return <div>데이터를 불러오는 중입니다...</div>
+    } else {
+      return ( 
+
+          <TravelStateContext.Provider value={data}>
+            <TravelDispatchContext.Provider 
+              value={{ onCreate, onUpdate, onDelete }} >
+
+                
+         <div className="App">
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/new' element={<New />} />
+              <Route path='/detail/:pid' element={<Detail />} /> 
+              <Route path='/detailItems/:id' element={<DetailItems />} /> 
+              <Route path='/edit/:id' element={<Edit />} /> 
+              <Route path='/thema/:pid' element={<Thema data={mockData} />} />
+            </Routes>
+
+          </div>
+              </TravelDispatchContext.Provider>
+          </TravelStateContext.Provider>
+        ); 
+      }
+    }
 export default App;
