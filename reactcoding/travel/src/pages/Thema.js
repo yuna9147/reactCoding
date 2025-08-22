@@ -1,25 +1,13 @@
 import TravelInfo from "../component/TravelInfo";
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import './Thema.css'
 import { useState } from "react";
-import Header from "../component/Header";
-import Button from "../component/Button";
 
-
-const Thema = ({ data }) => {
-  const { pid } = useParams();
-  const navigate = useNavigate();
-
-  const goBack = () =>{
-    navigate(-1);
-  };
-
-   // pid에 해당하는 여행만 필터
-  const filteredData  = data.filter(item => String(item.pid)===String(pid));
+const Thema = ({ data,pid }) => {
 
   // 해당 여행 안에서 option 별 필터링
-  const activities = filteredData.filter(d => d.option === 'activity');
-  const foods = filteredData.filter(d => d.option === 'food');
+  const activities = data.filter(d => d.option === 'activity');
+  const foods = data.filter(d => d.option === 'food');
 
   const [showActivity, setShowActivity] = useState(true);
   const [showFood, setShowFood] = useState(true);
@@ -27,7 +15,6 @@ const Thema = ({ data }) => {
 
     return(
         <div className="Thema">
-            <Header title="여행지 정보" leftChild={<Button img="left" onClick={goBack}/>  }/>
             <div className="totalInfo">{activities.length+foods.length}개 항목</div>
             <div className="activity-section">
                 <div className="wrapper" >

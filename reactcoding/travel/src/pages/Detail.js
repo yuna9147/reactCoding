@@ -1,20 +1,21 @@
 import './Detail.css';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import useDetail from '../hooks/useDatil';
 import PixabayImage from '../component/PixabayImage';
-import { dateSeparate } from '../component/util';
-import TravelInfo from '../component/TravelInfo';
 import { useState } from 'react';
+import Thema from './Thema';
+import Schedule from './Schedule';
+import Button from '../component/Button';
 
 const Detail = () => {
     const {pid} = useParams();
     const data = useDetail(pid);
-    const navigator = useNavigate();
-
+    const [activeTab, setActiveTab] = useState("schedule"); // 기본 탭
 
     if(!data){
         return <div>여행 불러오는 중...</div>
     } else {
+
         return (
         <div className="Detail">
             <h1>{data.title}</h1>
@@ -23,21 +24,25 @@ const Detail = () => {
                 <span class="overlay-text">{data.city}</span>
                 <h3>{new Date(data.start_date).toLocaleDateString()} - {new Date(data.end_date).toLocaleDateString()}</h3>
             </div>
-            <div className='category_section'>
-                <button type="button" onClick={()=> navigator(`/thema/${data.pid}`)}>관심 리스트</button>
-                <button type="button">여행 일정</button>
+        
+
+            {/* 내용추가 */}
+            <div className="category_section">
+                <Button
+                    text="관심 리스트"
+                    isActive={activeTab === 'thema'}
+                    onClick={() => setActiveTab('thema')}
+                />
+                <Button
+                    text="여행 일정"
+                    isActive={activeTab === 'schedule'}
+                    onClick={() => setActiveTab('schedule')}
+                />
             </div>
-            <div className='create_section'>
-                <button type="button" onClick={()=> navigator("/detailItems")}>일정 추가</button>
-            </div>
-            <div className='main_section'>
-                
-                {dateSeparate(data.start_date, data.end_date).map((i)=>(
-                    <div key={i}>
-                        <h4>{i}일차</h4>
-                        <TravelInfo />
-                    </div>
-                ))}
+   
+             {/* 하단 콘텐츠 영역 */}
+            <div className="content_section">
+                {activeTab === 'thema'? <Thema data={data.content} pid={pid}/> : <Schedule /> }
             </div>
         </div>
     )

@@ -1,6 +1,5 @@
 import { dateSeparate } from '../component/util';
 import TravelInfo from '../component/TravelInfo';
-import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import useDetail from '../hooks/useDatil';
 

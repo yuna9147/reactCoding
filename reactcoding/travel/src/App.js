@@ -15,10 +15,11 @@ const mockData = [
   {
   pid:0,
   title:"프랑스 여행",
+  city:"파리",
   start_date: new Date(day).getTime(),
   end_date: new Date(day).getTime() + (5000*60*60*24),
+   content: [{
   id:"0",
-  city:"파리",
   spot:"개선문",
   about:`에투알 개선문은 프랑스 파리에 있는 개선문이다.
         프랑스 혁명과 나폴레옹 전쟁 시기에 죽은 프랑스 병사들을 기리기 위하여 지어졌으며, 1836년 7월 26일에 완공되었다.
@@ -39,15 +40,38 @@ const mockData = [
        [휴무일]
        1월 1일, 5월 1일, 5월 8일(아침), 6월 14일(아침), 11월 11일(아침), 12월 25일`,
   option:"activity",
-  img:"triomphe.jpg"
+  img:"triomphe.jpg"},
+{
+  id:"1",
+  spot:"에펠탑",
+  about:`에펠탑은 프랑스 파리 마르스 광장에 위치한 격자형 철골 타워이다. 
+
+        1889년에 프랑스 혁명 100주년을 맞이하여 파리 만국 박람회를 개최하였는데 이 박람회를 상징할만한 기념물로 에펠탑을 건축하였다.
+        박람회가 열린 마르스 광장 출입 관문에 위치해있다. 프랑스의 대표 건축물인 에펠탑은 격자 구조로 이루어져 파리에서 가장 높은 건축물이며, 매년 수백만 명이 방문할 정도로 파리에서 빼놓을 수 없는 세계적으로 유명한 관광명소이다. 
+        이 탑은 공모전을 통해 선정된 프랑스 공학자 귀스타브 에펠의 작품으로 이를 디자인한 그의 이름을 따서 명명했다.
+
+        에펠탑은 그 높이가 324m이며,이는 81층 높이의 건물과 맞먹는 높이이다. 
+        1930년 크라이슬러 빌딩이 완공되기 전까지는 세계에서 가장 높은 건축물이었다. 
+        방송용 안테나를 제외하고도, 2004년 지어진 미요 교에 이어 프랑스에서 두 번째로 높은 구조물이다. 1991년에는 세계문화유산으로 등재되었다.`,
+  tags:"건축물",
+  tip:`운영안내
+
+       08:45~00:45 
+       (마지막 입장 23:45)
+
+       [휴무일] 연중무휴`,
+  option:"activity",
+  img:"eiffelTower.jpg"}
+]
   },
   {
-  pid: 0,
-  title:"프랑스 여행",
+  pid: 1,
+  title:"배낭 여행",
+  city:"도쿄",
   start_date: new Date(day).getTime(),
   end_date: new Date(day).getTime() + (1000*60*60*24),
+  content: [{
   id:"1",
-  city:"도쿄",
   spot:"디즈니랜드" ,
   about:`1983년에 개장했으며, 826,000㎡의 부지에 미국 애너하임에 위치한 디즈니랜드를 재현한 테마파크다.
 
@@ -62,15 +86,16 @@ const mockData = [
       시즌에 따라 시간 변동, 반드시 방문일자의 공식 홈페이지를 확인하세요.
       `,
   option:"activity",
-  img:"disneyland.jpg"
+  img:"disneyland.jpg"}]
   },
   {
   pid: 0,
   title:"신혼 여행",
+  city:"발리",
   start_date: new Date(day).getTime(),
   end_date: new Date(day).getTime() + (1000*60*60*24),
+  content: [{
   id:"2",
-  city:"발리",
   spot:"Taco Casa" ,
   about:`2010년에 설립된 타코 카사는 심플하고 깔끔하며 캐주얼하고 빠른 서비스를 제공하는 타코 전문점으로, 신선하고 가볍고 맛있는 멕시코 요리를 선보입니다. 
   
@@ -91,7 +116,7 @@ const mockData = [
       10:00~22:00
       `,
   option:"food",
-  img:"taco.jpg"
+  img:"taco.jpg"}]
   },
   
 ]
