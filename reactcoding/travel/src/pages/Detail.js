@@ -1,20 +1,18 @@
 import './Detail.css';
 import { useParams } from 'react-router-dom';
 import {useState } from 'react';
-
 import useDetail from '../hooks/useDatil';
 import PixabayImage from '../component/PixabayImage';
 import Thema from './Thema';
 import Schedule from './Schedule';
 import Button from '../component/Button';
+import Header from '../component/Header';
 
 
 const Detail = () => {
     const {pid} = useParams();      // 파라미터값 pid 추출
     const data = useDetail(pid);    // pid에 해당되는 data 추출
     const [activeTab, setActiveTab] = useState("schedule"); // 기본 탭
-
-    
 
     // 데이터 로딩 완료되면 표시   
     if(!data){
@@ -23,6 +21,7 @@ const Detail = () => {
 
         return (
         <div className="Detail">
+        <Header />
             <h1>{data.title}</h1>
            <div className="info_section">
                 <PixabayImage city={data.city} />

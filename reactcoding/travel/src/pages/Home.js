@@ -6,10 +6,11 @@ import PixabayImage from '../component/PixabayImage';
 import { useNavigate } from 'react-router-dom';
 import location from '../img/location.png';
 import calendar from '../img/calendar.png';
+import Header from '../component/Header';
 
 const Home = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
-
+  
   const handleOpen = () => setOpenSidebar(true);
   const handleClose = () => setOpenSidebar(false);
 
@@ -21,16 +22,27 @@ const Home = () => {
 
   const data = useContext(TravelStateContext);
   const { onDelete, onUpdate } = useContext(TravelDispatchContext);
+
+  // 수정 모드 진입
+  const [isEdit, setIsEdit] = useState(false);
+  // 수정할 pid 저장
+  const [selectPid, setSelectPid] = useState(null);
+  const handleEdit = (pid) => {
+    setIsEdit(true);
+    setSelectPid(pid);
+    handleOpen();
+  };
   
   return (
     <div className="Travel">
-    <div style={{ width: "100%", padding: "20px", height:"100vh"}}>
+      <Header />
+    <div style={{ padding: "20px", height:"100vh"}}>
       <div className='Title'>
         <h1><header>나의 여행</header></h1>
       </div>
 
       <div className='NewTravel'>
-        <button onClick={handleOpen}> 새 여행 만들기</button>
+        <button type="button" onClick={handleOpen}> 새 여행 만들기</button>
       </div>
             
       <div className='Array'>
@@ -43,24 +55,24 @@ const Home = () => {
         </select>
       </div>
       
-     {data.map((it,idx) => (
-        <div key={idx} className="content-wrapper">
+     {data.map((it) => (
+        <div key={it.pid} className="content-wrapper">
           <div className='travel-image'>
             <PixabayImage city={it.city} />
             </div>
             <div className='travel-content'>
-              <div className='title' onClick={()=>goDetail(idx)}>{it.title}</div>
+              <div className='title' onClick={()=>goDetail(it.pid)}>{it.title}</div>
               <div className="city"><img src={location}/>{it.city}</div>
               <div className='date'><img src={calendar}/>{new Date(it.start_date).toLocaleDateString()} ~ {new Date(it.end_date).toLocaleDateString()}</div>
           </div>
           <div className='travel-buttons'>
-          <button type="button" onClick={() => onUpdate(idx)}>수정</button>
-          <button type="button" onClick={() => onDelete(idx)}>삭제</button>
+          <button type="button" onClick={() => handleEdit(it.pid)}>수정</button>
+          <button type="button" onClick={() => onDelete(it.pid)}>삭제</button>
         </div>
         </div>
       ))}
 
-      {openSidebar && <New component={"home"} onClose={handleClose} />}
+      {openSidebar && <New component={"home"} handleClose={handleClose} isEdit={isEdit} setIsEdit={setIsEdit} pid={selectPid} setSelectedIds={setSelectPid}/>}
     </div>
     </div>
   );

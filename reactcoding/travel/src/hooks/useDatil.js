@@ -8,6 +8,8 @@ const useDetail = (pid) => {
     const navigate = useNavigate(); 
 
     useEffect(()=> {
+        if (pid === undefined || pid === null) return;
+
         const matchTravel = data.find((it) => String(it.pid) === String(pid));
         if(matchTravel) {
             setTravel(matchTravel);
@@ -15,7 +17,8 @@ const useDetail = (pid) => {
             alert("여행 정보가 존재하지 않습니다");
             navigate("/", {replace: true}); 
         }
-    }, [pid, data]);
+    }, [pid, data, navigate]);
+
     return travel;
 }
 

@@ -13,6 +13,7 @@
     flex-direction: column;
     justify-content: space-between;
     font-family: 'Noto Sans KR', sans-serif;
+     transform: translateX(0); /* 열렸을 때 */
 }
 
 .New h5 { margin: 0;}
@@ -101,6 +102,19 @@
     font-size: 14px;
     cursor: pointer;
     transition: 0.2s all ease-in-out;
+}
+
+
+.New .button_section  #updateBtn {
+    background-color: #4c74af;
+    color: #fff;
+    position: absolute;
+    right: 140px;
+    bottom: 10%;
+}
+
+.New .button_section #updateBtn:hover {
+    background-color: #2e4d7a;
 }
 
 .New .button_section #createBtn {

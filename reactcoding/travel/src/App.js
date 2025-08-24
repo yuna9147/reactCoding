@@ -8,15 +8,13 @@ import Schedule from './pages/Schedule';
 import Home from './pages/Home';
 
 
-const day = new Date().getTime();
-
 const mockData = [
   {
   pid:0,
   title:"프랑스 여행",
   city:"파리",
-  start_date: new Date(day).getTime(),
-  end_date: new Date(day).getTime() + (5000*60*60*24),
+  start_date: new Date().getTime(),
+  end_date: new Date().getTime() + (5000*60*60*24),
    content: [{
   id:"0",
   spot:"개선문",
@@ -39,7 +37,9 @@ const mockData = [
        [휴무일]
        1월 1일, 5월 1일, 5월 8일(아침), 6월 14일(아침), 11월 11일(아침), 12월 25일`,
   option:"activity",
-  img:"triomphe.jpg"},
+  img:"triomphe.jpg",
+  day:1,
+},
 {
   id:"1",
   spot:"에펠탑",
@@ -60,15 +60,16 @@ const mockData = [
 
        [휴무일] 연중무휴`,
   option:"activity",
-  img:"eiffelTower.jpg"}
-]
-  },
+  img:"eiffelTower.jpg",
+  day:2,
+}, 
+]},
   {
   pid: 1,
   title:"배낭 여행",
   city:"도쿄",
-  start_date: new Date(day).getTime(),
-  end_date: new Date(day).getTime() + (1000*60*60*24),
+  start_date: new Date().getTime(),
+  end_date: new Date().getTime() + (1000*60*60*24),
   content: [{
   id:"1",
   spot:"디즈니랜드" ,
@@ -85,14 +86,16 @@ const mockData = [
       시즌에 따라 시간 변동, 반드시 방문일자의 공식 홈페이지를 확인하세요.
       `,
   option:"activity",
-  img:"disneyland.jpg"}]
+  img:"disneyland.jpg",
+day:1,
+}]
   },
   {
   pid: 2,
   title:"신혼 여행",
   city:"발리",
-  start_date: new Date(day).getTime(),
-  end_date: new Date(day).getTime() + (1000*60*60*24),
+  start_date: new Date().getTime(),
+  end_date: new Date().getTime() + (1000*60*60*24),
   content: [{
   id:"2",
   spot:"Taco Casa" ,
@@ -115,7 +118,9 @@ const mockData = [
       10:00~22:00
       `,
   option:"food",
-  img:"taco.jpg"}]
+  img:"taco.jpg",
+  day:1,
+}]
   },
   
 ]
@@ -139,12 +144,25 @@ function reducer(state, action) {
     // 특정 여행 수정
     case "UPDATE": {
       return state.map((it)=>
-        String(it.pid) === String(action.data.pid) ? {...action.data}:it)
+        String(it.pid) === String(action.data.pid) ? {...it, ...action.data}:it)
+    }
+    // 특정 여행의 세부 일정 수정
+    case "UPDATEDETAIL": {
+      const { pid, id, contentData } = action.data;
+      return state.map(it =>
+        String(it.pid) === String(pid) 
+          ? {
+              ...it, 
+              content: it.content.map((p) => String(p.id) === String(id) ? {...p, ...contentData} : p)
+            } 
+          : it
+      )
     }
     // 특정 여행 삭제
     case "DELETE": {
       return state.filter((it) => String(it.pid) !== String(action.pid));
     }
+    // 특정 여행의 세부 일정 삭제
     case "DELETEDETAIL": {
       return state.map((it) => String(it.pid) === String(action.pid)
         ? {
@@ -167,7 +185,7 @@ export const TravelDispatchContext = React.createContext();
 function App() {
   const [isDataLoaded, setIsDataLoaded] = useState(false);  // 데이터 로딩 여부
   const [data, dispatch] = useReducer(reducer, []);         // 메인 여행 데이터 State
-  const pidRef = useRef(3);                                 // 특정 여행(pid) 자동 증가 ref : 특정 여행 개수
+  const pidRef = useRef(mockData.length);                                 // 특정 여행(pid) 자동 증가 ref : 특정 여행 개수
   
   // 컴포넌트 첫 실행 시 mockData 로딩
   useEffect(()=>{
@@ -210,16 +228,28 @@ function App() {
     });
   };
   // 특정 여행 수정 함수
-  const onUpdate = (pid, date, content, emotionId) => {
-    // dispatch({
-    //   type:"UPDATE",
-    //   data: {
-    //     id: targetId,
-    //     date:new Date(date).getTime(),
-    //     content,
-    //     emotionId,
-    //   },
-    // });
+  const onUpdate = (pid, title, city, start_date, end_date) => {
+    dispatch({
+      type:"UPDATE",
+      data: {
+        pid,
+        title:title,
+        city:city,
+        start_date: new Date(start_date).getTime(),
+        end_date: new Date(end_date).getTime(),
+      },
+    });
+  };
+  // 특정 여행의 세부 일정 수정 함수
+  const onUpdateDetail = (pid, id, contentData) => {
+    dispatch({
+      type:"UPDATEDETAIL",
+      data: {
+        pid,
+        id,
+        contentData,
+      },
+    });
   };
 
   // 특정 여행 삭제 함수
@@ -245,7 +275,7 @@ function App() {
     return (
       <div className="App">
         <TravelStateContext.Provider value={data}>
-          <TravelDispatchContext.Provider value={{ onCreate, onCreateDetail, onUpdate, onDelete, onDeleteDetail }}>
+          <TravelDispatchContext.Provider value={{ onCreate, onCreateDetail, onUpdate, onUpdateDetail, onDelete, onDeleteDetail }}>
             <Routes>
               <Route path="/" element={<Home/>}/>                          {/* 메인 컴포넌트 */}
               <Route path="/new" element={<New/>}/>                        {/* 여행 생성 컴포넌트 */}

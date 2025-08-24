@@ -1,5 +1,3 @@
-import React from "react";
-
 const InputForm = ({ title, children, onSubmit, handleClose, isEdit, setIsEdit }) => {
     return (
         <div className="New">
