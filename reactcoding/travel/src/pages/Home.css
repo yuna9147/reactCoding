@@ -1,65 +1,140 @@
-.Home {
-    width: 1000px;
-    margin: 0 auto;
-    padding: 10px;
-    background-color: white;
-}
-.NewTravel div {
-    width: 100%;
-}
-.NewTravel button {
-    width: 100%;
-    height: 70px;
-    background-color: white;
-    border-radius: 10px ;
-    cursor: pointer;
-}
-
-.Array h5 {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-}
+/* Home.css */
 
 .Travel {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    outline: auto;
-}
-.Travel Link {
-    text-decoration: none;
-    
+  display: flex;
+  flex-direction: column;  /* 세로 정렬 */
+  gap: 20px;
+  padding: 15px;
+  width: 1000px;
+  box-sizing: border-box;
 }
 
-.Array {
+.Travel .NewTravel button:hover{
+    background-color: #cfcfcf33;
+    color:#307aac;
+    cursor: pointer;
+}
+
+
+.Travel .Title{
+    text-align: left;
+}
+
+.Travel .NewTravel:hover{
+    color: pink;
+}
+
+
+.Travel .NewTravel button{
+    width:100%;
+    border:1px solid #aaaaaa9c;
+    background-color: transparent;
+    line-height: 70px;
+    border-radius: 10px;
+    font-size: 18px;
+    color: #333;
+    font-weight: 500;
+}
+
+.Travel .Array{
+    display:flex;
+    align-items: center;
+    justify-content: right;
+    gap:10px;
+    margin-right: 20px;
+}
+
+.Travel .Array .sort-dropdown,span,option{
+    border:none;
+    font-size: 17px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+
+.Travel .content-wrapper{
+    border:1px solid #aaaaaa9c;
+    border-radius: 10px;;
+    width: 100%;
+    margin: 30px auto;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap:10px;
+    box-sizing: border-box;
 }
 
-.Array h5 {
-    margin: 0;
-    font-size: 14px;
-    color: #666;
+.Travel .travel-image img {
+  width: 200px;
+  height: 170px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  display: block;
 }
 
-.sort-dropdown {
-    padding: 8px 12px;
+.Travel .travel-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  margin-left: 20px;
+  text-align: left;
+  height:150px;
+}
+
+.Travel .travel-content .title {
+  font-size: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+  height:30%;
+}
+
+.Travel .travel-content .title:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+.Travel .travel-content .city {
+  font-size: 17px;
+  font-weight: 400;
+  text-decoration: none;
+  color: #888888;
+  height:50%;
+}
+
+.Travel .travel-content .city img, .date img{
+  width:15px;
+  height:15px;
+  margin-right: 10px;;
+}
+
+.Travel .travel-content .date {
+  font-size: 17px;
+  font-weight: 400;
+  text-decoration: none;
+  color: #888888;
+  height:20%;
+}
+
+.Travel .travel-buttons{
+    margin-right: 20px;
+}
+
+
+.Travel .travel-buttons button {
+   font-size: 12px;
+    padding: 5px 10px;
+    margin-left: 10px;
+    border-radius: 5px;
     border: none;
-    background-color: transparent;
-    font-size: 14px;
     cursor: pointer;
-    outline: none;
+    background-color: #f0f0f0;
+    transition: 0.2s;
+  margin-left: 10px;
 }
 
-.sort-dropdown option {
-    padding: 10px;
-    background-color: white;
-    color: #333;
-    font-size: 14px;
-    border: none;
+.Travel .travel-buttons button:hover {
+  background-color: #d4d3d3;
 }
-

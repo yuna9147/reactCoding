@@ -1,19 +1,38 @@
 .New {
-    background-color: white;
-    width: 500px;
+    background-color: #fff;
+    width: 30%;
     height: 100vh;
     position: fixed;
     top: 0;
     right: 0;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
-    padding: 40px;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+    padding: 20px 30px;
     border-radius: 5px;
     z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.New h5 { margin: 0;}
+.New div { width: 100%; }
+
+.New h1 {
+    margin: 0 0 20px 0;
+    font-size: 27px;
+    font-weight: 600;
+    color: #333;
     text-align: left;
 }
 
-.New h5 { margin: 0; }
-.New div { width: 100%; }
+.New .input_section {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 5px; /* 스크롤 시 잘림 방지 */
+    text-align: left;
+}
+
 .New .input_section input {
     box-sizing: border-box;
     width: 100%;
@@ -24,21 +43,86 @@
 .New .input_section .Input .date {
     display: flex;
     flex-direction: row;
+}
+.New .input_section .Input .radio {
+    display: flex;
     gap: 10px;
+    margin: 10px 0;
 }
-.New button {
-    cursor: pointer;
+.New .input_section .Input .radio input {
+    width: 15px;
+    margin: 0;
+}
+
+.New .input_section input,
+.New .input_section textarea,
+.New .input_section select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.New .input_section input:focus,
+.New .input_section textarea:focus {
+
+    border:2px solid #52da8f;
+}
+
+.New .input_section textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.New .input_section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #555;
+}
+
+.New .input_section .category {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+
+.New .button_section button {
+    padding: 8px 15px;
+    border: none;
     border-radius: 5px;
-    padding: 5px;
-    width: 100px;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s all ease-in-out;
 }
-.New #createBtn {
+
+.New .button_section #createBtn {
+    background-color: #4caf50;
+    color: #fff;
     position: absolute;
-    right: 150px;
-    bottom: 150px;
+    right: 140px;
+    bottom: 10%;
 }
-.New #cancelBtn {
+
+.New .button_section #createBtn:hover {
+    background-color: #45a049;
+}
+
+.New .button_section #cancelBtn {
+    background-color: #f0f0f0;
+    color: #555;
     position: absolute;
-    right: 40px;
-    bottom: 150px;
+    right: 50px;
+    bottom: 10%;
+}
+
+.New .button_section #cancelBtn:hover {
+    background-color: #e0e0e0;
 }

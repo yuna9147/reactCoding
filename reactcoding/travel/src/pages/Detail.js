@@ -1,17 +1,22 @@
 import './Detail.css';
 import { useParams } from 'react-router-dom';
+import {useState } from 'react';
+
 import useDetail from '../hooks/useDatil';
 import PixabayImage from '../component/PixabayImage';
-import { useState } from 'react';
 import Thema from './Thema';
 import Schedule from './Schedule';
 import Button from '../component/Button';
 
+
 const Detail = () => {
-    const {pid} = useParams();
-    const data = useDetail(pid);
+    const {pid} = useParams();      // 파라미터값 pid 추출
+    const data = useDetail(pid);    // pid에 해당되는 data 추출
     const [activeTab, setActiveTab] = useState("schedule"); // 기본 탭
 
+    
+
+    // 데이터 로딩 완료되면 표시   
     if(!data){
         return <div>여행 불러오는 중...</div>
     } else {
@@ -19,9 +24,9 @@ const Detail = () => {
         return (
         <div className="Detail">
             <h1>{data.title}</h1>
-            <div className="info_section">
-                <PixabayImage city={data.city}/>
-                <span class="overlay-text">{data.city}</span>
+           <div className="info_section">
+                <PixabayImage city={data.city} />
+                <h1 className='overlay-text'>{data.city}</h1>
                 <h3>{new Date(data.start_date).toLocaleDateString()} - {new Date(data.end_date).toLocaleDateString()}</h3>
             </div>
         
@@ -42,7 +47,7 @@ const Detail = () => {
    
              {/* 하단 콘텐츠 영역 */}
             <div className="content_section">
-                {activeTab === 'thema'? <Thema data={data.content} pid={pid}/> : <Schedule /> }
+                {activeTab === 'thema'? <Thema data={data.content} pid={pid} /> : <Schedule /> }
             </div>
         </div>
     )

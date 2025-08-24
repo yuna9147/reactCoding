@@ -10,7 +10,9 @@
     height: 300px;
     position: relative;
 }
-.Detail .info_section h3, .overlay-text{
+
+
+.Detail .info_section h3{
     margin-left: 30px;
     color: white;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
@@ -21,49 +23,68 @@
 .Detail .info_section .overlay-text{
     margin-left: 30px;
     color: rgb(255, 255, 255);
-    font-size: 80px;
+    font-size: 50px;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
     position: absolute;
     top: 50%; /* 세로 중앙 */
     left: 50%; /* 가로 중앙 */ 
-    transform: translate(-50%, -50%);
+    transform: translate(-60%, -100%); /* 자신의 중앙을 기준으로 위치 이동 */
 }
 .Detail .category_section {
-    margin-left: 10px;
     margin-top: 20px;
     padding-bottom: 10px;
-    border-bottom:  1px solid #e2e2e2;
+    border-bottom:  1px solid #e2e2e2; /*수정 필요*/
+    display: flex;
+    gap:10px;
 }
+
 .Detail .create_section {
     margin-top: 20px;
     padding-bottom: 10px;
     border-bottom:  1px solid #e2e2e2;
 }
+.Detail .content_section .top_section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.Detail .content_section .top_section button {
+    height: 30px;
+    margin-left: 10px;
+}
+.Detail .content_section .planItem{
+    display: flex;
+    align-items: flex-start;
+}
+.Detail .content_section .planItem input {
+  transform: scale(1.2); 
+  margin-top: 25px;
+}
 
-.PixabayImage {
+.Detail .info_section .PixabayImage {
     width: 100%;
     height: 100%;
 }
-.PixabayImage img{
+
+
+.Detail .info_section .PixabayImage img{
     width: 100%;
     height: 100%;
     object-fit: cover; 
     border-radius: 10px;
+
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
     gap: 10px;
-    
 }
-
-
-.PixabayImage::after {
+.Detail .info_section .PixabayImage::after {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(133, 133, 133, 0.3);
+    background-color: rgba(0,0,0,0.3);
     border-radius: 10px;
 }

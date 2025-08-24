@@ -4,8 +4,7 @@ import {Routes, Route} from 'react-router-dom';
 import Thema from './pages/Thema';
 import New from './pages//New';
 import Detail from './pages/Detail';
-import Edit from './pages/Edit';
-import DetailItems from './pages/DetailItems';
+import Schedule from './pages/Schedule';
 import Home from './pages/Home';
 
 
@@ -89,7 +88,7 @@ const mockData = [
   img:"disneyland.jpg"}]
   },
   {
-  pid: 0,
+  pid: 2,
   title:"신혼 여행",
   city:"발리",
   start_date: new Date(day).getTime(),
@@ -120,35 +119,57 @@ const mockData = [
   },
   
 ]
-function reducer(state,action){
-  switch(action.type){
-    case "INIT" : {
+// 상태 관리용 reducer 함수
+function reducer(state, action) {
+  switch(action.type) {
+    // 초기 데이터 불러오기
+    case "INIT": {
       return action.data;
     }
-    case "CREATE" : {
-      return [action.data, ...state];
+    // 새로운 여행 추가
+    case "CREATE": {
+      return [...state, { ...action.data, content:[]}];
     }
-    case "UPDATE" : {
-      return state.map((it) =>
-        String(it.id) === String(action.data.id) ? {...action.data} : it);
+    // 특정 여행에 세부 일정 추가
+    case "CREATEDETAIL": {
+      const { pid, id, contentData } = action.data;
+      return state.map((it)=>
+        String(it.pid) === String(pid) ? {...it, content: [...it.content, {id, ...contentData}]}:it)
     }
-    case "DELETE" : {
-      return state.filter((it) => String(it.id)!==String(action.targetId));
+    // 특정 여행 수정
+    case "UPDATE": {
+      return state.map((it)=>
+        String(it.pid) === String(action.data.pid) ? {...action.data}:it)
     }
-    default:{
+    // 특정 여행 삭제
+    case "DELETE": {
+      return state.filter((it) => String(it.pid) !== String(action.pid));
+    }
+    case "DELETEDETAIL": {
+      return state.map((it) => String(it.pid) === String(action.pid)
+        ? {
+            ...it, 
+            content: it.content.filter((p) => !action.ids.includes(p.id))
+          }
+        : it
+      );
+    }
+    default: {
       return state;
     }
   }
 }
 
+// 전역 상태(Context) 생성
 export const TravelStateContext = React.createContext();
 export const TravelDispatchContext = React.createContext();
 
-const App = () => {
-    const [isDataLoaded, setIsDataLoaded] = useState(false);
-  const [data, dispatch] = useReducer(reducer, []);
-  const idRef = useRef(3);
-
+function App() {
+  const [isDataLoaded, setIsDataLoaded] = useState(false);  // 데이터 로딩 여부
+  const [data, dispatch] = useReducer(reducer, []);         // 메인 여행 데이터 State
+  const pidRef = useRef(3);                                 // 특정 여행(pid) 자동 증가 ref : 특정 여행 개수
+  
+  // 컴포넌트 첫 실행 시 mockData 로딩
   useEffect(()=>{
     dispatch({
       type: "INIT",
@@ -157,55 +178,86 @@ const App = () => {
     setIsDataLoaded(true);
   },[]);
 
+  // 새로운 여행 생성 함수
   const onCreate = (title, city, start_date, end_date) => {
-    const newDataNum = idRef.current;
+    const newPid = pidRef.current;
     dispatch({
       type:"CREATE",
       data: {
-        pid:newDataNum,
+        pid:pidRef.current,
         title:title,
         city:city,
         start_date: new Date(start_date).getTime(),
         end_date: new Date(end_date).getTime(),
-      },
-    });
-    idRef.current += 1;
-    return newDataNum;
-  };
-  console.log(data);
-
-  const onUpdate = () => {
-
-  }
-  const onDelete = () => {
-    
-  }
-
-  
-  if(!isDataLoaded) {
-      return <div>데이터를 불러오는 중입니다...</div>
-    } else {
-      return ( 
-
-          <TravelStateContext.Provider value={data}>
-            <TravelDispatchContext.Provider 
-              value={{ onCreate, onUpdate, onDelete }} >
-
-                
-         <div className="App">
-            <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/new' element={<New />} />
-              <Route path='/detail/:pid' element={<Detail />} /> 
-              <Route path='/detailItems/:id' element={<DetailItems />} /> 
-              <Route path='/edit/:id' element={<Edit />} /> 
-              <Route path='/thema/:pid' element={<Thema data={mockData} />} />
-            </Routes>
-
-          </div>
-              </TravelDispatchContext.Provider>
-          </TravelStateContext.Provider>
-        ); 
       }
-    }
-export default App;
+    });
+    pidRef.current += 1;
+    return newPid;
+  };
+  // 특정 여행의 세부 일정 생성 함수
+  const onCreateDetail = (pid, contentData) => {
+    const target = data.find((it) => String(it.pid) === String(pid));
+    const nextid = target && target.content.length > 0 
+      ? Math.max(...target.content.map(p => p.id)) + 1
+      : 0;
+    dispatch({
+      type:"CREATEDETAIL",
+      data: {
+        pid,
+        id:nextid,
+        contentData
+      }
+    });
+  };
+  // 특정 여행 수정 함수
+  const onUpdate = (pid, date, content, emotionId) => {
+    // dispatch({
+    //   type:"UPDATE",
+    //   data: {
+    //     id: targetId,
+    //     date:new Date(date).getTime(),
+    //     content,
+    //     emotionId,
+    //   },
+    // });
+  };
+
+  // 특정 여행 삭제 함수
+  const onDelete = (pid) => {
+    dispatch({
+      type:"DELETE",
+      pid,
+    });
+  };
+  // 특정 여행의 세부 일정 삭제 함수
+  const onDeleteDetail = (pid, ids) => {
+    dispatch({
+      type:"DELETEDETAIL",
+      pid,
+      ids,
+    });
+  };
+
+  // 데이터 로딩 완료되면 표시
+  if(!isDataLoaded) {
+    return <div>데이터를 불러오는 중입니다...</div>
+  } else {
+    return (
+      <div className="App">
+        <TravelStateContext.Provider value={data}>
+          <TravelDispatchContext.Provider value={{ onCreate, onCreateDetail, onUpdate, onDelete, onDeleteDetail }}>
+            <Routes>
+              <Route path="/" element={<Home/>}/>                          {/* 메인 컴포넌트 */}
+              <Route path="/new" element={<New/>}/>                        {/* 여행 생성 컴포넌트 */}
+              <Route path="/detail/:pid" element={<Detail/>}/>             {/* 세부 일정 메인 컴포넌트 */}
+              <Route path="/Thema/:pid" element={<Thema/>}/>               {/* 세부 일정 카테고리화 컴포넌트 */}
+              <Route path="/Schedule/:pid" element={<Schedule/>}/>         {/* 상세 세부일정 컴포넌트 */}
+            </Routes>
+          </TravelDispatchContext.Provider>
+        </TravelStateContext.Provider>
+      </div>
+    )
+  }
+}
+
+export default App;   
