@@ -4,19 +4,21 @@ import { TravelStateContext } from "../App";
 
 const useDetail = (pid) => {
     const data = useContext(TravelStateContext);
-    console.log(data);
-    const [travel, setTravle] = useState();
+    const [travel, setTravel] = useState();
     const navigate = useNavigate(); 
 
     useEffect(()=> {
+        if (pid === undefined || pid === null) return;
+
         const matchTravel = data.find((it) => String(it.pid) === String(pid));
         if(matchTravel) {
-            setTravle(matchTravel);
+            setTravel(matchTravel);
         } else {
             alert("여행 정보가 존재하지 않습니다");
             navigate("/", {replace: true}); 
         }
-    }, [pid]);
+    }, [pid, data, navigate]);
+
     return travel;
 }
 

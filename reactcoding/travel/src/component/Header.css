@@ -1,31 +1,65 @@
-.Header{
-    padding-top:20px;
-    padding-bottom:20px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #e2e2e2;
+.header {
+  position: fixed;           /* 상단 고정 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background-color: #ffffffcc; /* 반투명 흰색 */
+  backdrop-filter: blur(10px); /* 부드러운 블러 효과 */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 1000;
 }
 
-.Header > div{
-    display: flex;
+/* 왼쪽 영역 */
+.header-left {
+  display: flex;
+  align-items: center;
 }
 
-.Header .header_title{
-    width:50%;
-    font-size: 30px;
-    font-weight: bold;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    flex-flow: column;
+/* 홈 버튼 스타일 */
+.home-button {
+  background-color: #87878a5e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.Header .header_left {
-    width:25%;
-    justify-content: start;
+.home-button:hover {
+  background-color: #87878a;
+  transform: translateY(-2px);
 }
 
-.Header .header_right {
-    width:25%;
-    justify-content: end;
+.home-button:active {
+  transform: translateY(0);
+}
+
+/* 중앙 로고 */
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  height: 60px; /* 로고 크기 조정 가능 */
+  object-fit: contain;
+}
+
+/* 오른쪽 영역 */
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+/* 페이지 내용이 헤더 아래에서 시작하도록 패딩 */
+body, .Travel {
+  padding-top: 60px; /* header 높이와 동일하게 */
 }

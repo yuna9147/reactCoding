@@ -14,24 +14,24 @@
 .travelInfo .image-section {
   width: 200px;
   height:150px;
-  margin-right: 20px;
   display: flex;
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .travelInfo .image-section img {
   box-sizing: border-box;
-  max-width: 100%;
-  height: auto;
+  width: 180px;
+  height: 140px;
   display: block;
   object-fit: cover;
   border-radius: 8px;
 }
 
+
+
 .travelInfo .image-section img:hover{
   cursor: pointer;
-  opacity: 0.8;
-
+  opacity: 0.5;
 }
 
 .travelInfo .content-section {
@@ -41,7 +41,8 @@
   flex-direction: column;
   justify-content:start; 
   text-align: left;
-    box-sizing: border-box;
+  box-sizing: border-box;
+  margin-left: 20px;
 }
 
 .travelInfo .city {
@@ -70,17 +71,17 @@
 
 }
 
-.travelInfo .tags a {
+.travelInfo .tags .tip {
   color: #007bff;
   text-decoration: none;
   margin-left: 20px;
 }
 
-.travelInfo .tags a:hover {
+.travelInfo .tags .tip:hover {
   text-decoration: underline;
 }
 
-.travelInfo .info-section{
+.travelInfo .about{
     margin-top: 10px;
     color:#666
 }

@@ -1,0 +1,84 @@
+.Schedule {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 300px;
+    padding: 10px 0;
+    overflow-x: hidden;
+}
+
+.Schedule .main_section {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.Schedule .content_section {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(207, 208, 209, 0.1);
+    box-sizing: border-box;
+}
+
+.Schedule .top_section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.Schedule .top_section h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.Schedule .top_section button {
+    font-size: 12px;
+    padding: 5px 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    transition: 0.2s;
+}
+
+.Schedule .top_section button:hover {
+    background-color: #dcdcdc;
+}
+
+.Schedule .planItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px; /* 이미지와 텍스트 사이 간격 */
+    margin-bottom: 10px;
+}
+
+.Schedule .planItem input[type="checkbox"] {
+    transform: scale(1.2);
+    margin-top: 5px;
+}
+
+.Schedule .planItem .TravelInfo {
+    width: 100%;
+}
+
+/* 체크박스와 내용 wrapper */
+.Schedule .planItem .TravelInfo div {
+    padding: 8px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    font-size: 14px;
+}
+
+
+
+
+/* 전체 일차 정보 표시 */
+.Schedule .dayHeader {
+    font-size: 14px;
+    font-weight: 500;
+    color: gray;
+    margin-bottom: 5px;
+}

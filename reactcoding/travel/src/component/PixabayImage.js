@@ -1,44 +1,50 @@
 import axios from 'axios';
 import { useEffect, useState } from "react";
 
-/* 픽사베이 API 사용하여 사진 불러오기 */
-const PixabayImage = ({city}) => {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+const PixabayImage = ({ city, tags }) => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-    useEffect(() => {
-        if(!city) return;
+  useEffect(() => {
+    const query = city || tags; // city 우선, 없으면 tags
+    if (!query) return;
 
-        const API_KEY = '51896639-b4f429885c53c29b8be38d4f6'
-        const url = `https://pixabay.com/api/?key=${API_KEY}&q=${city}&image_type=photo&category=travel`
-        
-        setLoading(true);
-        setError(null);
+    const fetchImages = async () => {
+      const API_KEY = '51896639-b4f429885c53c29b8be38d4f6';
+      const category = city ? '&category=travel' : '';
+      const url = `https://pixabay.com/api/?key=${API_KEY}&q=${query}&image_type=photo${category}`;
 
-        axios.get(url)
-            .then(res => {
-                setData(res.data.hits)
-                setLoading(false)
-            })
-            .catch(error => {
-                setData([])
-                setLoading(false)
-                setError('-- ERROR --')
-            })
-    }, [city]);
+      setLoading(true);
+      setError(null);
 
-    return(
-        <div className='PixabayImage'>
-            {data.length > 0 && (
-                <img
-                    src={data[0].webformatURL}
-                    alt={city}
-                />
-               
-            )} 
-        </div>
-    )
-}
+      try {
+        const res = await axios.get(url);
+        setData(res.data.hits);
+      } catch (err) {
+        setData([]);
+        setError('-- ERROR --');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchImages();
+  }, [city, tags]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+
+  return (
+    <div className='PixabayImage'>
+      {data.length > 0 && (
+        <img
+          src={data[0].webformatURL}
+          alt={city || tags}
+        />
+      )}
+    </div>
+  );
+};
 
 export default PixabayImage;
