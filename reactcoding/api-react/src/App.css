@@ -1,0 +1,54 @@
+.App {
+  max-width: 1090px;
+  margin: 30px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border:1px solid black;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 30px;
+}​
+
+.App-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.App-table th, .App-table td {
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.App-table th {
+  background-color: #c2d7e7f5;
+  font-weight: bold;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.App-table tbody tr:nth-child(even){
+  background-color: #97aebd11;
+}
+
+.App-table tbody tr:hover {
+  background-color: #2f9de659;
+}
+
+.image{
+  width:171px;
+  height:180px;
+}
+
+.table-td-width1{
+  width:120px;
+}
+
+.table-td-width2{
+  width:460px;
+}
+
+.link{
+  text-decoration: none;
+}
