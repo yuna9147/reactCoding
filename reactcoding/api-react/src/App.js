@@ -1,43 +1,61 @@
-import React,{useEffect, useState} from 'react';
+//import React,{useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Route, Routes, useLocation} from 'react-router-dom';
-import Home from './pages/Home';
+//import { Route, Routes, useLocation} from 'react-router-dom';
+//import Home from './pages/Home';
 //import Detail from './pages/Detail';
 //import List from './pages/List';
 
-
-const url = 'http://localhost:8080/api/board/list';
-export const BoardStateContext = React.createContext();
+const url = 'http://localhost:8080/api/todo/list';
 
 const App = () => {
-  const [isDataLoaded, setIsDataLoaded] = useState(false);
-  const [result, setResult] = useState({});
 
   useEffect(() =>{
     fetch(url)
     .then(response=>response.json())
     .then(data =>{
-      setResult(data);
-      setIsDataLoaded(true);
+      console.log(data);
     })
     .catch(error => console.log(error));
   },[]);
-  if(!isDataLoaded) {
-    return <div>데이터를 불러오는 중입니다..</div>;
-  }
-  else {
+ 
     return (
-      <>
-        <BoardStateContext.Provider value = {result}>
-          <Routes>
-            <Route path='/' element={<Home />} />
-          </Routes>
-        </BoardStateContext.Provider>
-      </>
+      <div className="App"></div>
     );
-  }
-};
+  };
+
+// const url = 'http://localhost:8080/api/board/list';
+// export const BoardStateContext = React.createContext();
+
+// const App = () => {
+//   const [isDataLoaded, setIsDataLoaded] = useState(false);
+//   const [result, setResult] = useState({});
+
+//   useEffect(() =>{
+//     fetch(url)
+//     .then(response=>response.json())
+//     .then(data =>{
+//       setResult(data);
+//       setIsDataLoaded(true);
+//     })
+//     .catch(error => console.log(error));
+//   },[]);
+//   if(!isDataLoaded) {
+//     return <div>데이터를 불러오는 중입니다..</div>;
+//   }
+//   else {
+//     return (
+//       <>
+//         <BoardStateContext.Provider value = {result}>
+//           <Routes>
+//             <Route path='/' element={<Home />} />
+//           </Routes>
+//         </BoardStateContext.Provider>
+//       </>
+//     );
+//   }
+// };
 // export const stateContext=React.createContext();
 
 // const serviceKey='035bf9883b6516d3ec7e443705bfd30cca9bffcb8988350bdd5d5f78e4a17ab0';
